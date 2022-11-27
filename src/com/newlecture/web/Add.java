@@ -15,7 +15,7 @@ public class Add extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8"); //한글로 쓰려고
+		response.setCharacterEncoding("UTF-8"); //한글로 출력하려고
 		response.setContentType("text/html; charset=UTF-8"); //브라우저야 한글로 인식해줘라고 요청
 		
 		String x_ = request.getParameter("x");
