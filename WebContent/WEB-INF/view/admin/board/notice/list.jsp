@@ -154,39 +154,40 @@
 					</form>
 				</div>
 
-				<div class="notice margin-top">
-					<h3 class="hidden">공지사항 목록</h3>
-					<table class="table">
-						<thead>
-							<tr>
-								<th class="w60">번호</th>
-								<th class="expand">제목</th>
-								<th class="w100">작성자</th>
-								<th class="w100">작성일</th>
-								<th class="w60">조회수</th>
-								<th class="w40">공개</th>
-								<th class="w40">삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<c:forEach var="n" items="${list}">
-								<!-- 저장소에 있는 것을 itmes에 담을 수 있다. 반복될 때마다 하나씩 꺼내지는 것을 담는 게 var -->
-								<!-- 'n'이라는 키워드로 PageContext 저장소에 담아주는 게 forEach의 역할, forEach는 collection의 값을 꺼내줌 -->
-								<!-- 'c'라는 접두사를 써주는 이유는 jasper가 forEach 태크가 HTML 태크인 지 아닌지 구별할 수 있게 도와주려고 -->
-								<!-- varStatus 반복할 때 사용할 수 있는 index 값 -->
-
+				<form action="list" method="post">
+					<div class="notice margin-top">
+						<h3 class="hidden">공지사항 목록</h3>
+						<table class="table">
+							<thead>
 								<tr>
-									<td>${n.id}</td>
-									<td class="title indent text-align-left"><a
-										href="detail?id=${n.id}">${n.title}</a><span>[${n.cmtCount}]</span></td>
-									<td>${n.writerId}</td>
-									<!-- EL은 반복할 수 있는 기능이 없다. 데이터 출력 기능만 가능하다. -->
-									<td><fmt:formatDate pattern="yy-MM-dd"
-											value="${n.regDate}" /></td>
-									<td>${n.hit}</td>
-									<td><input type="checkbox" name="open"></td>
-									<td><input type="checkbox" name="del"></td>
+									<th class="w60">번호</th>
+									<th class="expand">제목</th>
+									<th class="w100">작성자</th>
+									<th class="w100">작성일</th>
+									<th class="w60">조회수</th>
+									<th class="w40">공개</th>
+									<th class="w40">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<c:forEach var="n" items="${list}">
+									<!-- 저장소에 있는 것을 itmes에 담을 수 있다. 반복될 때마다 하나씩 꺼내지는 것을 담는 게 var -->
+									<!-- 'n'이라는 키워드로 PageContext 저장소에 담아주는 게 forEach의 역할, forEach는 collection의 값을 꺼내줌 -->
+									<!-- 'c'라는 접두사를 써주는 이유는 jasper가 forEach 태크가 HTML 태크인 지 아닌지 구별할 수 있게 도와주려고 -->
+									<!-- varStatus 반복할 때 사용할 수 있는 index 값 -->
+
+									<tr>
+										<td>${n.id}</td>
+										<td class="title indent text-align-left"><a
+											href="detail?id=${n.id}">${n.title}</a><span>[${n.cmtCount}]</span></td>
+										<td>${n.writerId}</td>
+										<!-- EL은 반복할 수 있는 기능이 없다. 데이터 출력 기능만 가능하다. -->
+										<td><fmt:formatDate pattern="yy-MM-dd"
+												value="${n.regDate}" /></td>
+										<td>${n.hit}</td>
+										<td><input type="checkbox" name="open-id" value="${n.id}"></td>
+										<td><input type="checkbox" name="del-id"value="${n.id}"></td>
 								</tr>
 
 							</c:forEach>
@@ -212,10 +213,11 @@
 
 
 				<div class="text-align-right margin-top">
-					<input type="submit" class="btn-text btn-default" value="일괄공개">
-					<input type="submit" class="btn-text btn-default" value="일괄삭제">
-					<a class="btn-text btn-default" href="reg.html">글쓰기</a>
+					<input type="submit" class="btn-text btn-default" name="cmd" value="일괄공개">
+					<input type="submit" class="btn-text btn-default" name="cmd" value="일괄삭제">
+					<a class="btn-text btn-default" href="reg">글쓰기</a>
 				</div>
+				</form>
 
 				<div class="margin-top align-center pager">
 
