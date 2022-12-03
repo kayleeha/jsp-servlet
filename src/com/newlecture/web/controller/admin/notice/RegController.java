@@ -25,7 +25,7 @@ import com.newlecture.web.service.NoticeService;
 		maxRequestSize = 1024*1024*50*5
 
 		)
-@WebServlet("/admin/board/notice/reg")
+@WebServlet("/admin/board/notice/reg") //registration 등록
 public class RegController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +46,7 @@ public class RegController extends HttpServlet{
 				
 		for(Part p : parts) {
 			if(!p.getName().equals("file")) continue;
+			if(p.getSize() == 0) continue; //첨부 파일 하나만 올려도 오류가 나지 않게 하기 위함
 
 			Part filePart = p;
 			
@@ -58,6 +59,11 @@ public class RegController extends HttpServlet{
 
 			String realPath = request.getServletContext().getRealPath("/upload");
 			System.out.println(realPath); // 사용자가 전달한 파일을 물리적인 곳..realPath에다 파일 저장
+			
+			File path = new File(realPath); // 'upload'라는 디렉토리가 물리적인 경로에 존재하는가
+			if(!path .exists())
+				path.mkdirs();
+			
 
 			String filePath = realPath + File.separator + fileName;
 			FileOutputStream fos = new FileOutputStream(filePath);

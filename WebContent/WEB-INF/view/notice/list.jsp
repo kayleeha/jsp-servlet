@@ -205,7 +205,7 @@
 									<!-- EL은 반복할 수 있는 기능이 없다. 데이터 출력 기능만 가능하다. -->
 									<td><fmt:formatDate pattern="yy-MM-dd"
 											value="${n.regDate}" /></td>
-									<td>${n.hit}</td>
+									<td><fmt:formatNumber value="${n.hit}"/></td>
 								</tr>
 
 							</c:forEach>
